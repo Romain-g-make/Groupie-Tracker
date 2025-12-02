@@ -7,14 +7,86 @@
 
 }
 
-.connexion {
-  width: 100%;
-  padding: 12px 16px 12px 40px; /* espace pour l’icône */
-  border: 1px solid #e6e8eb;
-  border-radius: 12px;
-  background-size: 18px;
-  box-shadow: 0 8px 24px rgba(31,35,40,0.08);
-  transition: box-shadow 160ms ease, border-color 160ms ease;
+/* .connexion { */
+  /* width: 100%; */
+  /* padding: 12px 16px 12px 40px;  */
+  /* border: 1px solid #e6e8eb; */
+  /* border-radius: 12px; */
+  /* background-size: 18px; */
+  /* box-shadow: 0 8px 24px rgba(31,35,40,0.08); */
+  /* transition: box-shadow 160ms ease, border-color 160ms ease; */
+/* } */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.4;
+  background: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/*middle part (enter part)*/
+.hero {
+    background: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+    margin-top: 0;
+}
+
+.hero-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/*les buttons*/
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
 }
 
 .connexion input:focus {
@@ -23,245 +95,250 @@
   outline: none;
 }
 
+footer {
+    background: rgba(255, 255, 255, 0.9);
+    color: rgb(167, 3, 3);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
 .a1 {
     color: black;
     text-decoration: none;
+    /* display: block; */
 }
 .a1:hover {
-    color: white;
+    color: red;
 }
 
 .b2 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .b2:hover {
-    color: white;
+    color: red;
 }
 
 .c3 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .c3:hover {
-    color: white;
+    color: red;
 }
 
 .d4 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .d4:hover {
-    color: white;
+    color: red;
 }
 
 .e5 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .e5:hover {
-    color: white;
+    color: red;
 }
 
 .f6 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .f6:hover {
-    color: white;
+    color: red;
 }
 
 .g7 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .g7:hover {
-    color: white;
+    color: red;
 }
 
 .h8 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .h8:hover {
-    color: white;
+    color: red;
 }
 
 .i9 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .i9:hover {
-    color: white;
+    color: red;
 }
 
 .j10 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .j10:hover {
-    color: white;
+    color: red;
 }
 
 .k11 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .k11:hover {
-    color: white;
+    color: red;
 }
 
 .l12 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .l12:hover {
-    color: white;
+    color: red;
 }
 
 .m13 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .m13:hover {
-    color: white;
+    color: red;
 }
 
 .n14 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .n14:hover {
-    color: white;
+    color: red;
 }
 
 .o15 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .o15:hover {
-    color:white;
+    color: red;
 }
 
 .p16 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .p16:hover {
-    color: white;
+    color: red;
 }
 
 .q17 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .q17:hover {
-    color: white;
+    color: red;
 }
 
 .r18 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .r18:hover {
-    color: white;
+    color: red;
 }
 
 .s19 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .s19:hover {
-    color: white;
+    color: red;
 }
 
 .t20 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .t20:hover {
-    color: white;
+    color: red;
 }
 
 .u21 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .u21:hover {
-    color: white;
+    color: red;
 }
 
 .v22 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .v22:hover {
-    color: white;
+    color: red;
 }
 
 .w23 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .w23:hover {
-    color: white;
+    color: red;
 }
 
 .x24 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .x24:hover {
-    color: white;
+    color: red;
 }
 
 .y25 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .y25:hover {
-    color: white;
+    color: red;
 }
 
 .z26 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .z26:hover {
-    color: white;
+    color: red;
 }
-
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background: linear-gradient(to right, #ff0000 0%, #000000 60%);
-    font-family: Arial, sans-serif;
-    color: white;
-}
-
