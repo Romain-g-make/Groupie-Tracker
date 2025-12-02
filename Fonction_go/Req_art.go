@@ -28,3 +28,12 @@ func Get_artistes(artistes []Artist) []string {
 	}
 	return list_art
 }
+
+func Find_artist(artistes []Artist, name string) Artist {
+	for i:=0 ; i<len(artistes); i++ {
+		if artistes[i].Nom == name {
+			return artistes[i]
+		}
+	}
+	return Artist{}
+}

@@ -1,5 +1,7 @@
 package fonction_go
 
+import "sort"
+
 func Get_alphabet(artistes []Artist) []string {
 	var alphabet []string
 	for i := 0; i < len(artistes); i++ {
@@ -15,5 +17,10 @@ func Get_alphabet(artistes []Artist) []string {
 			alphabet = append(alphabet, first_letter)
 		}
 	}
+	return Tri_alphabet(alphabet)
+}
+
+func Tri_alphabet(alphabet []string) []string {
+	sort.Strings(alphabet)
 	return alphabet
 }

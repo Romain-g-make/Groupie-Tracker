@@ -8,11 +8,13 @@
 </head>
 <body>
     <input class="connexion" type="text" placeholder="Rechercher...">
-    <div class="alphabet">
-        {{ range .Lettres }}
-            <a class="letter" href="/lettre/{{ . }}">{{ . }}</a>
-        {{ end }}
-    </div>
+    <nav class="alphabet">
+      {{range .Lettre}}
+        <a class="letter" href="/?letter={{.}}">{{.}}</a>
+      {{else}}
+        <span>Aucun</span>
+      {{end}}
+    </nav> 
 
 
     <div class="hero">

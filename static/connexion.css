@@ -109,11 +109,11 @@ footer p {
     opacity: 0.8;
 }
 
-.lettre {
+.Lettre {
     color: black;
     text-decoration: none;
     /* display: block; */
 }
-.lettre:hover {
+.Lettre:hover {
     color: red;
 }
