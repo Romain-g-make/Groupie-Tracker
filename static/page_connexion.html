@@ -8,32 +8,12 @@
 </head>
 <body>
     <input class="connexion" type="text" placeholder="Rechercher...">
-    <a class="a1">A</a>
-    <a class="b2">B</a>
-    <a class="c3">C</a>
-    <a class="d4">D</a>
-    <a class="e5">E</a>
-    <a class="f6">F</a>
-    <a class="g7">G</a>
-    <a class="h8">H</a>
-    <a class="i9">I</a>
-    <a class="j10">J</a>
-    <a class="k11">K</a>
-    <a class="l12">L</a>
-    <a class="m13">M</a>
-    <a class="n14">N</a>
-    <a class="o15">O</a>
-    <a class="p16">P</a>
-    <a class="q17">Q</a>
-    <a class="r18">R</a>
-    <a class="s19">S</a>
-    <a class="t20">T</a>
-    <a class="u21">U</a>
-    <a class="v22">V</a>
-    <a class="w23">W</a>
-    <a class="x24">X</a>
-    <a class="y25">Y</a>
-    <a class="z26">Z</a>
+    <div class="alphabet">
+        {{ range .Lettres }}
+            <a class="letter" href="/lettre/{{ . }}">{{ . }}</a>
+        {{ end }}
+    </div>
+
 
     <div class="hero">
         <div class="hero-content">
