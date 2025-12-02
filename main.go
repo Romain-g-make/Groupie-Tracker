@@ -2,59 +2,67 @@ package main
 
 import (
 	"fonction/Fonction_go"
+	"encoding/json"
+	"fmt"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
 )
 
-type Artist struct {
-	id            int      `json:"id"`
-	nom           string   `json:"name"`
-	image         string   `json:"image"`
-	annee_deb     int      `json:"creationDate"`
-	date_prem_alb string   `json:"firstAlbum"`
-	membres       []string `json:"members"`
-	locations     []string `json:"locations"`
-	date_concerts []string `json:"concertDates"`
-}
-
-var artistes Artist
-
-type Donnees struct {
-	artist Artist
-	page int
-	pagination int
-}
+var artistes []fonction_go.Artist
 
 func renderTemplate(w http.ResponseWriter, r *http.Request) {
+	request_art()
+	p := r.URL.Query().Get("pagination")
+	pagination_act, _ := strconv.Atoi(p)
+
+	pa := r.URL.Query().Get("page")
+	page_act, _ := strconv.Atoi(pa)
 	
-	p := r.URL.Query().Get(pagination)
-	pagination_act,_ := strconv.Atoi(p)
+	tmpl, err := template.ParseFiles("static/page_connexion.html")
 	
-	pa := r.URL.Query().Get(page)
-	page_act,_ := strconv.Atoi(pa)
-	
-	tmpl, err := template.ParseFiles("static/page_connexion")
-	artiste_dec := []Artist{artistes}
-	
-	if pagination_act != 0 {
-		artiste_dec = Fonction_go.Pagination(pagination_act,artiste_dec)
-		
-	}
-	
-	donnees := Donnees{
-		artist : artiste_dec[page_act] ,
-		page: page_act,
-		pagination: pagination_act,
-	}
-	
-	err = tmpl.Execute(w, donnees)
-	
+	var artiste_dec [][]fonction_go.Artist
+
 	if err != nil {
 		http.Error(w, "Erreur template : "+err.Error(), http.StatusInternalServerError)
 		log.Println("Erreur template :", err)
 		return
+	}
+	if pagination_act != 0 {
+		artiste_dec = fonction_go.Pagination(pagination_act,artistes)
+	} else{
+		artiste_dec = fonction_go.Pagination(1,artistes)
+	}
+
+	donnees := fonction_go.Donnees{
+		Artist:     artiste_dec[page_act],
+		Page:       page_act,
+		Pagination: pagination_act,
+	}
+	fmt.Println(donnees)
+	fmt.Println(artistes)
+
+	err = tmpl.Execute(w, donnees)
+
+	if err != nil {
+		http.Error(w, "Erreur template : "+err.Error(), http.StatusInternalServerError)
+		log.Println("Erreur template :", err)
+		return
+	}
+}
+
+func request_art() {
+	url := "https://groupietrackers.herokuapp.com/api/artists"
+	req, _ := http.NewRequest("GET", url, nil)
+	res, _ := http.DefaultClient.Do(req)
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	err := json.Unmarshal(body, &artistes)
+	if err != nil {
+		fmt.Println(err)
 	}
 }
 
