@@ -20,3 +20,11 @@ func Request_art(artistes *[]Artist) {
 		fmt.Println(err)
 	}
 }
+
+func Get_artistes(artistes []Artist) []string {
+	var list_art []string
+	for i:=0 ; i<len(artistes); i++ {
+		list_art = append(list_art, artistes[i].Nom)
+	}
+	return list_art
+}
