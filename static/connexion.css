@@ -109,9 +109,10 @@ footer p {
     opacity: 0.8;
 }
 
-/* .a1 {
+.a1 {
     color: black;
     text-decoration: none;
+    /* display: block; */
 }
 .a1:hover {
     color: red;
@@ -120,7 +121,7 @@ footer p {
 .b2 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .b2:hover {
     color: red;
@@ -129,7 +130,7 @@ footer p {
 .c3 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .c3:hover {
     color: red;
@@ -138,7 +139,7 @@ footer p {
 .d4 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .d4:hover {
     color: red;
@@ -147,7 +148,7 @@ footer p {
 .e5 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .e5:hover {
     color: red;
@@ -156,7 +157,7 @@ footer p {
 .f6 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .f6:hover {
     color: red;
@@ -165,7 +166,7 @@ footer p {
 .g7 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .g7:hover {
     color: red;
@@ -174,7 +175,7 @@ footer p {
 .h8 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .h8:hover {
     color: red;
@@ -183,7 +184,7 @@ footer p {
 .i9 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .i9:hover {
     color: red;
@@ -192,7 +193,7 @@ footer p {
 .j10 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .j10:hover {
     color: red;
@@ -201,7 +202,7 @@ footer p {
 .k11 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .k11:hover {
     color: red;
@@ -210,7 +211,7 @@ footer p {
 .l12 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .l12:hover {
     color: red;
@@ -219,7 +220,7 @@ footer p {
 .m13 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .m13:hover {
     color: red;
@@ -228,7 +229,7 @@ footer p {
 .n14 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .n14:hover {
     color: red;
@@ -237,7 +238,7 @@ footer p {
 .o15 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .o15:hover {
     color: red;
@@ -246,7 +247,7 @@ footer p {
 .p16 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .p16:hover {
     color: red;
@@ -255,7 +256,7 @@ footer p {
 .q17 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .q17:hover {
     color: red;
@@ -264,7 +265,7 @@ footer p {
 .r18 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .r18:hover {
     color: red;
@@ -273,7 +274,7 @@ footer p {
 .s19 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .s19:hover {
     color: red;
@@ -282,7 +283,7 @@ footer p {
 .t20 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .t20:hover {
     color: red;
@@ -291,7 +292,7 @@ footer p {
 .u21 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .u21:hover {
     color: red;
@@ -300,7 +301,7 @@ footer p {
 .v22 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .v22:hover {
     color: red;
@@ -309,7 +310,7 @@ footer p {
 .w23 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .w23:hover {
     color: red;
@@ -318,7 +319,7 @@ footer p {
 .x24 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .x24:hover {
     color: red;
@@ -327,7 +328,7 @@ footer p {
 .y25 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .y25:hover {
     color: red;
@@ -336,8 +337,8 @@ footer p {
 .z26 {
     color: black;
     text-decoration: none;
-    display: block;
+    /* display: block; */
 }
 .z26:hover {
     color: red;
-} */
+}
