@@ -1,7 +1,6 @@
 package fonction_go
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -31,6 +30,10 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		current_artist = Artist{}
 	}
 
+	if r.URL.Query().Get("Search") != "" {
+		artiste_dec = append(artiste_dec, Searching(artistes, r.URL.Query().Get("Search")))
+	}
+
 	if err != nil {
 		http.Error(w, "Erreur template : "+err.Error(), http.StatusInternalServerError)
 		log.Println("Erreur template :", err)
@@ -51,8 +54,6 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		Lettre:     alphabet,
 		Is_artist:  current_artist,
 	}
-
-	fmt.Println(donnees)
 
 	err = tmpl.Execute(w, donnees)
 
