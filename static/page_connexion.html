@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="/static/connexion.css">
 </head>
 <body>
-    <input class="connexion" type="text" placeholder="Rechercher...">
+    <form action="/" method="get">
+        <input class="connexion" type="text" placeholder="Rechercher..." name="Search">
+        <button class="connexion" type="submit">🔍</button>
+    </form>
     <nav class="alphabet">
       {{range .Lettre}}
         <a class="letter" href="/?letter={{.}}">{{.}}</a>
