@@ -1,0 +1,606 @@
+.connexion {
+  position: relative;
+  max-width: 520px;
+  margin: 32px auto;
+  display: flex;
+  align-items: center;
+
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.4;
+  background: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/*middle part (enter part)*/
+.hero {
+    background: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    color: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    padding: 100px 20px;
+    text-align: center;
+    margin-top: 0;
+}
+
+.hero-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/*les buttons*/
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    padding: 12px 30px;
+    font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    padding: 12px 30px;
+    font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   FEATURES SECTION
+   ============================================ */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 60px 0;
+}
+
+.feature-card {
+    background: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card h3 {
+    color: #667eea;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/*   SEARCH & FILTER SECTION    */
+
+.search-filter-section {
+    background: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-filter-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.filter-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+}
+
+.results-info {
+    color: #666;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+}
+
+/*   ARTISTS GRID   */
+
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.artist-card {
+    background: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.artist-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.artist-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.artist-info {
+    padding: 1.5rem;
+}
+
+.artist-info h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.artist-info p {
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.artist-info .btn {
+    margin-top: 1rem;
+    display: block;
+    text-align: center;
+}
+
+/* ============================================
+   ARTIST DETAIL
+   ============================================ */
+
+.detail-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.artist-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.detail-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.detail-content h1 {
+    color: #333;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.detail-section {
+    margin-bottom: 2rem;
+}
+
+.detail-section h2 {
+    color: #667eea;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 0.5rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.info-item {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.info-item strong {
+    color: #667eea;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.members-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.members-list li {
+    background: #667eea;
+    color: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+}
+
+.links-section a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.links-section a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+.connexion input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.12);
+  outline: none;
+}
+
+footer {
+    background: rgba(255, 255, 255, 0.9);
+    color: rgb(167, 3, 3);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+.a1 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.a1:hover {
+    color: red;
+}
+
+.b2 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.b2:hover {
+    color: red;
+}
+
+.c3 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.c3:hover {
+    color: red;
+}
+
+.d4 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.d4:hover {
+    color: red;
+}
+
+.e5 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.e5:hover {
+    color: red;
+}
+
+.f6 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.f6:hover {
+    color: red;
+}
+
+.g7 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.g7:hover {
+    color: red;
+}
+
+.h8 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.h8:hover {
+    color: red;
+}
+
+.i9 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.i9:hover {
+    color: red;
+}
+
+.j10 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.j10:hover {
+    color: red;
+}
+
+.k11 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.k11:hover {
+    color: red;
+}
+
+.l12 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.l12:hover {
+    color: red;
+}
+
+.m13 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.m13:hover {
+    color: red;
+}
+
+.n14 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.n14:hover {
+    color: red;
+}
+
+.o15 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.o15:hover {
+    color: red;
+}
+
+.p16 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.p16:hover {
+    color: red;
+}
+
+.q17 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.q17:hover {
+    color: red;
+}
+
+.r18 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.r18:hover {
+    color: red;
+}
+
+.s19 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.s19:hover {
+    color: red;
+}
+
+.t20 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.t20:hover {
+    color: red;
+}
+
+.u21 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.u21:hover {
+    color: red;
+}
+
+.v22 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.v22:hover {
+    color: red;
+}
+
+.w23 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.w23:hover {
+    color: red;
+}
+
+.x24 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.x24:hover {
+    color: red;
+}
+
+.y25 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.y25:hover {
+    color: red;
+}
+
+.z26 {
+    color: black;
+    text-decoration: none;
+    /* display: block; */
+}
+.z26:hover {
+    color: red;
+}
