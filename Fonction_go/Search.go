@@ -1,51 +1,71 @@
 package fonction_go
 
-func Search(artistes []Artist, find_art string) (Artist, int) {
-	result := Artist{}
-	var correspondance int
+import (
+	"fmt"
+	"strings"
+)
+
+func Search(artistes []Artist, find_art string) map[string]int {
+
+	dic_art := make(map[string]int)
+	find_art_lower := strings.ToLower(find_art)
+
 	for i := 0; i < len(artistes); i++ {
-		if artistes[i].Nom == find_art {
-			result = artistes[i]
-			correspondance = len(find_art)
+		correspondance := 0
+		nom_lower := strings.ToLower(artistes[i].Nom)
+		if nom_lower == find_art_lower {
+			correspondance = len(find_art)*3
+		} else if strings.Contains(nom_lower, find_art_lower) {
+			correspondance = len(find_art)*2
 		} else {
-			min_len := len(artistes[i].Nom)
-			if len(find_art) < min_len {
-				min_len = len(find_art)
+			min_len := len(nom_lower)
+			if len(find_art_lower) < min_len {
+				min_len = len(find_art_lower)
 			}
 			for j := 0; j < min_len; j++ {
-				if artistes[i].Nom[j] == find_art[j] {
+				if nom_lower[j] == find_art_lower[j] {
 					correspondance++
 				} else {
 					break
 				}
 			}
 		}
+		if correspondance > 0 {
+			dic_art[artistes[i].Nom] = correspondance
+		}
 	}
-	return result, correspondance
+	return dic_art
 }
 
 func Searching(artistes []Artist, find_art string) []Artist {
+
 	var result []Artist
-	var dic_art map[string]int
-	for i := 0; i < 2; i++ {
-		i--
-		artiste, correspondance := Search(artistes, find_art)
-		dic_art[artiste.Nom] = correspondance
-		find_art = find_art[:len(find_art)-1]
-		if len(find_art) == 0 {
-			break
-		}
+
+	if find_art == "" {
+		return artistes
 	}
-	for key := range dic_art {
-		max_correspondance := dic_art[key]
-		for key2 := range dic_art {
-			if dic_art[key2] > max_correspondance {
-				max_correspondance = dic_art[key2]
-				key = key2
+	dic_art := Search(artistes, find_art)
+	if len(dic_art) == 0 {
+		fmt.Println("Aucun résultat trouvé pour:", find_art)
+		return result
+	}
+	for len(dic_art) > 0 {
+		max_correspondance := 0
+		max_key := ""
+		for key, score := range dic_art {
+			if score > max_correspondance {
+				max_correspondance = score
+				max_key = key
 			}
 		}
-		artiste := Find_artist(artistes, key)
-		result = append(result, artiste)
+		if max_key != "" {
+			artiste := Find_artist(artistes, max_key)
+			if artiste.Nom != "" {
+				result = append(result, artiste)
+			}
+			delete(dic_art, max_key)
+		}
 	}
+	fmt.Println(result)
 	return result
 }
