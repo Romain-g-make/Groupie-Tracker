@@ -24,7 +24,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 
 	if is_art != "" {
 		current_artist = Find_artist(artistes, is_art)
-		tmpl, err = template.ParseFiles("static/artiste_detail.html")
+		tmpl, err = template.ParseFiles("static/artist_detail.html")
 	} else {
 		current_artist = Artist{}
 	}
@@ -33,7 +33,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		artistes = Searching(artistes, r.URL.Query().Get("Search"))
 		pagination_act = 1
 		page_act = 0
-		tmpl, err = template.ParseFiles("static/artiste_list.html")
+		tmpl, err = template.ParseFiles("static/artists_list.html")
 	}
 
 	if err != nil {
