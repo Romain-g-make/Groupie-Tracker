@@ -7,6 +7,18 @@ func Search(artistes []Artist, find_art string) (Artist, int) {
 		if artistes[i].Nom == find_art {
 			result = artistes[i]
 			correspondance = len(find_art)
+		} else {
+			min_len := len(artistes[i].Nom)
+			if len(find_art) < min_len {
+				min_len = len(find_art)
+			}
+			for j := 0; j < min_len; j++ {
+				if artistes[i].Nom[j] == find_art[j] {
+					correspondance++
+				} else {
+					break
+				}
+			}
 		}
 	}
 	return result, correspondance
