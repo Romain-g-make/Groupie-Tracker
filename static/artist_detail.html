@@ -4,21 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Détail artiste</title>
-  <!-- Réutilise le style principal pour garder les mêmes couleurs -->
-  <link rel="stylesheet" href="connexion.css">
-  <link rel="stylesheet" href="/static/connexion.css">
-  <style>
-    /* Très simple: deux colonnes sur grand écran, une colonne sur mobile */
-    .wrap{max-width:1000px;margin:18px auto}
-    .layout{display:grid;grid-template-columns:260px 1fr;gap:18px}
-    @media (max-width:760px){.layout{grid-template-columns:1fr}}
-    .photo{width:100%;height:260px;background:#eee;border-radius:8px;overflow:hidden}
-    .photo img{width:100%;height:100%;object-fit:cover}
-    .box{background:rgba(255,255,255,0.95);padding:10px;border-radius:8px}
-    .members{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-    .member{background:#f0f0f6;padding:6px 10px;border-radius:999px}
-    .btn{display:inline-block;padding:8px 12px;background:#2d6cdf;color:#fff;border-radius:6px;text-decoration:none}
-  </style>
+
+  <link rel="stylesheet" href="/static/artist_detail.css">
 </head>
 <body>
   <div class="wrap">
