@@ -14,9 +14,12 @@ func Search(artistes []Artist, find_art string) map[string]int {
 		correspondance := 0
 		nom_lower := strings.ToLower(artistes[i].Nom)
 		if nom_lower == find_art_lower {
-			correspondance = len(find_art)*3
+			correspondance = len(find_art) * 3
 		} else if strings.Contains(nom_lower, find_art_lower) {
-			correspondance = len(find_art)*2
+			correspondance = len(find_art) * 2
+			if nom_lower[0:1] == find_art_lower[0:1] {
+				correspondance++
+			}
 		} else {
 			min_len := len(nom_lower)
 			if len(find_art_lower) < min_len {
