@@ -1,0 +1,168 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.4;
+  background: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    padding: 12px 30px;
+    font-size: 1.1rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+/*   SEARCH & FILTER SECTION    */
+
+.search-filter-section {
+    background: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-filter-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.filter-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+}
+
+.results-info {
+    color: #666;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+}
+
+/*   ARTISTS GRID   */
+
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.artist-card {
+    background: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.artist-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.artist-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.artist-info {
+    padding: 1.5rem;
+}
+
+.artist-info h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.artist-info p {
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.artist-info .btn {
+    margin-top: 1rem;
+    display: block;
+    text-align: center;
+}
+
+.simple-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+
+.simple-card{background:#000000;border-radius:8px;padding:8px;text-align:center;cursor:pointer;color:#fff}
+.thumb{height:110px;background:#111;border-radius:6px;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.name{margin-top:8px;font-weight:600;color:#fff}
+.top-actions{margin-bottom:12px}

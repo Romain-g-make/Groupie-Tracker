@@ -17,17 +17,9 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 	pa := r.URL.Query().Get("page")
 	page_act, _ := strconv.Atoi(pa)
 
-	is_art := r.URL.Query().Get("Is_artist")
-
 	tmpl, err := template.ParseFiles("static/page_connexion.html")
-	var current_artist Artist
 
-	if is_art != "" {
-		current_artist = Find_artist(artistes, is_art)
-		tmpl, err = template.ParseFiles("static/artist_detail.html")
-	} else {
-		current_artist = Artist{}
-	}
+	var artiste_dec [][]Artist
 
 	if r.URL.Query().Get("Search") != "" {
 		artistes = Searching(artistes, r.URL.Query().Get("Search"))
@@ -42,18 +34,18 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if pagination_act != 0 {
-		artiste_dec := Pagination(pagination_act, artistes)
-		artistes = artiste_dec[page_act]
+		artiste_dec = Pagination(pagination_act, artistes)
+	} else {
+		artiste_dec = Pagination(1, artistes)
 	}
 
-	alphabet := Get_alphabet(artistes)
+	lettres := Get_alphabet(artistes)
 
 	donnees := Donnees{
-		Artist:     artistes,
+		Artist:     artiste_dec[page_act],
 		Page:       page_act,
 		Pagination: pagination_act,
-		Lettre:     alphabet,
-		Is_artist:  current_artist,
+		Lettres:    lettres,
 	}
 
 	err = tmpl.Execute(w, donnees)

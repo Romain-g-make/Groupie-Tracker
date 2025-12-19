@@ -4,47 +4,75 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Détail artiste</title>
-  <!-- Réutilise le style principal pour garder les mêmes couleurs -->
-  <link rel="stylesheet" href="connexion.css">
-  <link rel="stylesheet" href="/static/connexion.css">
-  <style>
-    /* Très simple: deux colonnes sur grand écran, une colonne sur mobile */
-    .wrap{max-width:1000px;margin:18px auto}
-    .layout{display:grid;grid-template-columns:260px 1fr;gap:18px}
-    @media (max-width:760px){.layout{grid-template-columns:1fr}}
-    .photo{width:100%;height:260px;background:#eee;border-radius:8px;overflow:hidden}
-    .photo img{width:100%;height:100%;object-fit:cover}
-    .box{background:rgba(255,255,255,0.95);padding:10px;border-radius:8px}
-    .members{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-    .member{background:#f0f0f6;padding:6px 10px;border-radius:999px}
-    .btn{display:inline-block;padding:8px 12px;background:#2d6cdf;color:#fff;border-radius:6px;text-decoration:none}
-  </style>
+
+  <link rel="stylesheet" href="/static/artist_detail.css">
 </head>
 <body>
   <div class="wrap">
   <a class="btn" href="/static/artists_list.html">← Retour</a>
-  <div id="main" class="layout">
-    <div>
-      <div style="height:8px"></div>
-      <img src="{{.Is_artist.Image}}" alt="Photo de {{.Is_artist.Nom}}">
-      <div class="box">
-        <div><strong>Année de création</strong><div>{{.Is_artist.Annee_deb}}</div></div>
-        <div style="margin-top:8px"><strong>Premier album</strong><div>{{.Is_artist.Date_prem_alb}}</div></div>
+    <div style="height:12px"></div>
+
+    <div id="main" class="layout">
+      <div>
+        <div id="photo" class="photo">Chargement image...</div>
+        <div style="height:8px"></div>
+        <div class="box">
+          <div><strong>Année de création</strong><div id="creation">—</div></div>
+          <div style="margin-top:8px"><strong>Premier album</strong><div id="firstAlbum">—</div></div>
+        </div>
       </div>
-    </div>
-    <div>
-      <div>ID:{{.Is_artist.Id}}</span></div>
-      <div style="margin-top:12px"><strong>Membres</strong>
-        <div class="members">{{.Is_artist.Membres}}</div>
-      </div>
-      <div style="margin-top:12px"><strong>Locations</strong>
-        <div class="box">{{.Is_artist.Locations}}</div>
-      </div>
-      <div style="margin-top:12px"><strong>Dates de concerts</strong>
-        <div class="box">{{.Is_artist.Date_concerts}}</div>
+
+      <div>
+        <h1 id="name">Chargement…</h1>
+        <div>ID: <span id="id">—</span></div>
+
+        <div style="margin-top:12px"><strong>Membres</strong>
+          <div id="members" class="members"></div>
+        </div>
+
+        <div style="margin-top:12px"><strong>Locations</strong>
+          <div id="locations" class="box">—</div>
+        </div>
+
+        <div style="margin-top:12px"><strong>Dates de concerts</strong>
+          <div id="concertDates" class="box">—</div>
+        </div>
       </div>
     </div>
   </div>
-  </div>
+
+  <script>
+    function getId(){ const p=new URLSearchParams(location.search); return p.get('id')?Number(p.get('id')):null }
+
+    async function load(){
+      try{
+        const r = await fetch('/api/artists');
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        const list = await r.json();
+
+        const id = getId();
+        let artist = null;
+        if(id !== null) artist = (list||[]).find(a=>Number(a.id)===id);
+        if(!artist) artist = (list && list.length)? list[0] : null;
+        if(!artist){ document.getElementById('main').textContent='Aucun artiste'; return }
+
+        document.getElementById('name').textContent = artist.name || '—';
+        document.getElementById('id').textContent = artist.id ?? '—';
+
+        const photo = document.getElementById('photo'); photo.innerHTML = '';
+        if(artist.image) photo.innerHTML = `<img src="${artist.image}" alt="">`; else photo.textContent = 'Pas d\'image';
+
+        document.getElementById('creation').textContent = artist.creationDate ?? '—';
+        document.getElementById('firstAlbum').textContent = artist.firstAlbum || '—';
+
+        const m = document.getElementById('members'); m.innerHTML=''; (artist.members||[]).forEach(x=>{const s=document.createElement('span');s.className='member';s.textContent=x; m.appendChild(s)});
+
+        document.getElementById('locations').textContent = artist.locations || '—';
+        document.getElementById('concertDates').textContent = artist.concertDates || '—';
+
+      }catch(err){ document.getElementById('main').textContent = 'Erreur: '+err.message; console.error(err) }
+    }
+    load();
+  </script>
 </body>
 </html>

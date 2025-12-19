@@ -4,18 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Liste des groupes</title>
-  <!-- Utilise le même fichier de style que la page d'accueil pour garder les couleurs -->
-  <link rel="stylesheet" href="/static/connexion.css">
-  <style>
-    /* Styles simples et pédagogiques */
-    .simple-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-    /* Fond noir pour chaque carte d'artiste */
-    .simple-card{background:#000000;border-radius:8px;padding:8px;text-align:center;cursor:pointer;color:#fff}
-    .thumb{height:110px;background:#111;border-radius:6px;overflow:hidden}
-    .thumb img{width:100%;height:100%;object-fit:cover}
-    .name{margin-top:8px;font-weight:600;color:#fff}
-    .top-actions{margin-bottom:12px}
-  </style>
+
+  <link rel="stylesheet" href="/static/artists_list.css">
 </head>
 <body>
   <div class="container">
@@ -24,19 +14,32 @@
       <span style="margin-left:12px;color:#000">Liste des groupes</span>
     </div>
   </div>
-  <form action="/" method="get">
-    <div class="artists">
-    {{range .Artist}}
-      <a href="/?Is_artist={{.Nom}}" class="artist artist-btn">
-        <div class="image">
-          <img src="{{.Image}}" alt="Photo de {{.Nom}}">
-        </div>
-        <div class="name">{{.Nom}}</div>
-        </a>
-      {{else}}
-        <span>Aucun artiste trouvé.</span>
-      {{end}}
-    </div>
-  </form>
+  <script>
+
+    async function load(){
+      try{
+
+        const r = await fetch('/api/artists');
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        const list = await r.json();
+
+        let html = '<div class="simple-grid">';
+        for(const a of list){
+          const img = a.image ? `<img src="${a.image}" alt="">` : '<div style="padding:24px;color:#666">Pas d\'image</div>';
+          html += `<div class="simple-card" onclick="window.location='/static/artist_detail.html?id=${a.id}'">
+                    <div class="thumb">${img}</div>
+                    <div class="name">${a.name || '—'}</div>
+                  </div>`;
+        }
+        html += '</div>';
+        document.getElementById('main').innerHTML = html;
+
+      }catch(err){
+        document.getElementById('main').textContent = 'Erreur: '+err.message;
+        console.error(err);
+      }
+    }
+    load();
+  </script>
 </body>
 </html>

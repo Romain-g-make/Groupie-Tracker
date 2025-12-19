@@ -4,6 +4,6 @@ type Donnees struct {
 	Artist     []Artist
 	Page       int
 	Pagination int
-	Lettre	   []string
 	Is_artist   Artist
+	Lettres    []string
 }

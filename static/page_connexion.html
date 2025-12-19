@@ -4,20 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dico-Musique-Connexion</title>
-    <link rel="stylesheet" href="/static/connexion.css">
+    <link rel="stylesheet" href="/static/page_connexion.css">
 </head>
 <body>
-    <form action="/" method="get">
-        <input class="connexion" type="text" placeholder="Rechercher..." name="Search">
-        <button class="connexion" type="submit">🔍</button>
-        <nav class="alphabet">
-        {{range .Lettre}}
-            <a class="letter" href="/?Search={{.}}">{{.}}</a>
-        {{else}}
-            <span>Aucun</span>
-        {{end}}
-        </nav>
-    </form>
+    <input class="connexion" type="text" placeholder="Rechercher...">
+    <div class="alphabet">
+        {{ range .Lettres }}
+            <a class="letter" href="/lettres/{{ . }}">{{ . }}</a>
+        {{ end }}
+    </div>
 
     <div class="hero">
         <div class="hero-content">
@@ -47,8 +42,8 @@
             </div>
         </section>
     </div>
-        <!-- <footer>
+        <footer class="footer">   
             <p>Dico-Musique © 2024</p>
-        </footer> -->
+        </footer>
 </body>
 </html>
