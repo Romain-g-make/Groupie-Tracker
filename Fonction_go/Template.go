@@ -46,13 +46,13 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		artistes = artiste_dec[page_act]
 	}
 
-	alphabet := Get_alphabet(artistes)
+	lettres := Get_alphabet(artistes)
 
 	donnees := Donnees{
 		Artist:     artistes,
 		Page:       page_act,
 		Pagination: pagination_act,
-		Lettre:     alphabet,
+		Lettre:     lettres,
 		Is_artist:  current_artist,
 	}
 
