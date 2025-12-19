@@ -8,7 +8,6 @@ import (
 	"strconv"
 )
 
-
 var artistes []Artist
 
 func RenderTemplate(w http.ResponseWriter, r *http.Request) {
@@ -18,9 +17,9 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 
 	pa := r.URL.Query().Get("page")
 	page_act, _ := strconv.Atoi(pa)
-	
+
 	tmpl, err := template.ParseFiles("static/page_connexion.html")
-	
+
 	var artiste_dec [][]Artist
 
 	if err != nil {
@@ -29,9 +28,9 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if pagination_act != 0 {
-		artiste_dec = Pagination(pagination_act,artistes)
-	} else{
-		artiste_dec = Pagination(1,artistes)
+		artiste_dec = Pagination(pagination_act, artistes)
+	} else {
+		artiste_dec = Pagination(1, artistes)
 	}
 
 	lettres := Get_alphabet(artistes)
@@ -40,7 +39,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		Artist:     artiste_dec[page_act],
 		Page:       page_act,
 		Pagination: pagination_act,
-		Lettre:     lettres,
+		Lettres:    lettres,
 	}
 	fmt.Println(donnees)
 
