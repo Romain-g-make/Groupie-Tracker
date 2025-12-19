@@ -4,20 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Détail artiste</title>
-  <!-- Réutilise le style principal pour garder les mêmes couleurs -->
+
   <link rel="stylesheet" href="connexion.css">
   <link rel="stylesheet" href="/static/connexion.css">
   <style>
-    /* Très simple: deux colonnes sur grand écran, une colonne sur mobile */
+
     .wrap{max-width:1000px;margin:18px auto}
     .layout{display:grid;grid-template-columns:260px 1fr;gap:18px}
     @media (max-width:760px){.layout{grid-template-columns:1fr}}
-    .photo{width:100%;height:260px;background:#eee;border-radius:8px;overflow:hidden}
+    .photo{width:100%;height:260px;background:#000;border-radius:8px;overflow:hidden}
     .photo img{width:100%;height:100%;object-fit:cover}
-    .box{background:rgba(255,255,255,0.95);padding:10px;border-radius:8px}
+    .box{background:#000;padding:10px;border-radius:8px}
     .members{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-    .member{background:#f0f0f6;padding:6px 10px;border-radius:999px}
-    .btn{display:inline-block;padding:8px 12px;background:#2d6cdf;color:#fff;border-radius:6px;text-decoration:none}
+    .member{background: #000;;padding:6px 10px;border-radius:999px}
+    .btn{display:inline-block;padding:8px 12px;background:linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));border-radius:6px;text-decoration:none}
   </style>
 </head>
 <body>
@@ -55,12 +55,10 @@
   </div>
 
   <script>
-    // Code simple: on récupère la liste, on choisit l'artiste par id, puis on affiche.
     function getId(){ const p=new URLSearchParams(location.search); return p.get('id')?Number(p.get('id')):null }
 
     async function load(){
       try{
-        // Use the local proxy to avoid CORS issues
         const r = await fetch('/api/artists');
         if(!r.ok) throw new Error('HTTP '+r.status);
         const list = await r.json();
