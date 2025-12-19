@@ -34,13 +34,15 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		artiste_dec = Pagination(1,artistes)
 	}
 
+	lettres := Get_alphabet(artistes)
+
 	donnees := Donnees{
 		Artist:     artiste_dec[page_act],
 		Page:       page_act,
 		Pagination: pagination_act,
+		Lettre:     lettres,
 	}
 	fmt.Println(donnees)
-	fmt.Println(artistes)
 
 	err = tmpl.Execute(w, donnees)
 
