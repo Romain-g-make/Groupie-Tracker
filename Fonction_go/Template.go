@@ -10,7 +10,13 @@ import (
 var artistes []Artist
 
 func RenderTemplate(w http.ResponseWriter, r *http.Request) {
-	Request_art(&artistes)
+	current_art_loc := []string{}
+	current_art_date := []string{}
+	if err := Request_art(&artistes); err != nil {
+		http.Error(w, "Erreur lors de la récupération des artistes", http.StatusBadGateway)
+		log.Println("Erreur Request_art :", err)
+		return
+	}
 	p := r.URL.Query().Get("pagination")
 	pagination_act, _ := strconv.Atoi(p)
 
@@ -24,6 +30,8 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 
 	if is_art != "" {
 		current_artist = Find_artist(artistes, is_art)
+		current_art_loc = Get_Locations(current_artist.Id)
+		current_art_date = Get_Dates(current_artist.Id)
 		tmpl, err = template.ParseFiles("static/artist_detail.html")
 	} else {
 		current_artist = Artist{}
@@ -40,6 +48,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur template : "+err.Error(), http.StatusInternalServerError)
 		log.Println("Erreur template :", err)
 		return
+
 	}
 	if pagination_act != 0 {
 		artiste_dec := Pagination(pagination_act, artistes)
@@ -52,8 +61,10 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		Artist:     artistes,
 		Page:       page_act,
 		Pagination: pagination_act,
-		Lettre:     lettres,
+		Lettres:    lettres,
 		Is_artist:  current_artist,
+		Loc:        current_art_loc,
+		Dates:      current_art_date,
 	}
 
 	err = tmpl.Execute(w, donnees)
