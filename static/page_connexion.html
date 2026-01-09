@@ -6,13 +6,15 @@
     <title>Dico-Musique-Connexion</title>
     <link rel="stylesheet" href="/static/page_connexion.css">
 </head>
-<body>
+<body>>
     <input class="connexion" type="text" placeholder="Rechercher...">
-    <form method="GET" action="/" class="alphabet">
-        {{ range .Lettres }}
-            <button class="letter" type="submit" name="Search" value="{{ . }}">{{ . }}</button>
-        {{ end }}
-    </form>
+    <div class="alphabet">
+        <form method="GET" action="/" class="alphabet">
+            {{ range .Lettres }}
+                <button class="btn-primary" type="submit" name="Search" value="{{ . }}">{{ . }}</button>
+            {{ end }}
+        </form>
+    </div>
 
     <div class="hero">
         <div class="hero-content">
