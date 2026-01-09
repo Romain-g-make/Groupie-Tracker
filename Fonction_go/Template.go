@@ -11,21 +11,32 @@ var artistes []Artist
 
 func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 	current_art_loc_dates := map[string]string{}
-	if err := Request_art(&artistes); err != nil {
-		http.Error(w, "Erreur lors de la récupération des artistes", http.StatusBadGateway)
-		log.Println("Erreur Request_art :", err)
-		return
+	Reset := r.URL.Query().Get("Reset")
+	is_art := r.URL.Query().Get("Is_artist")
+
+	if Reset != "list" {
+		if err := Request_art(&artistes); err != nil {
+			http.Error(w, "Erreur lors de la récupération des artistes", http.StatusBadGateway)
+			log.Println("Erreur Request_art :", err)
+			return
+		}
 	}
+
 	p := r.URL.Query().Get("pagination")
 	pagination_act, _ := strconv.Atoi(p)
 
 	pa := r.URL.Query().Get("page")
 	page_act, _ := strconv.Atoi(pa)
 
-	is_art := r.URL.Query().Get("Is_artist")
-
 	tmpl, err := template.ParseFiles("static/page_connexion.html")
 	var current_artist Artist
+
+	if r.URL.Query().Get("Search") != "" || Reset == "list" {
+		artistes = Searching(artistes, r.URL.Query().Get("Search"))
+		pagination_act = 0
+		page_act = 0
+		tmpl, err = template.ParseFiles("static/artists_list.html")
+	}
 
 	if is_art != "" {
 		current_artist = Find_artist(artistes, is_art)
@@ -33,13 +44,6 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		tmpl, err = template.ParseFiles("static/artist_detail.html")
 	} else {
 		current_artist = Artist{}
-	}
-
-	if r.URL.Query().Get("Search") != "" {
-		artistes = Searching(artistes, r.URL.Query().Get("Search"))
-		pagination_act = 1
-		page_act = 0
-		tmpl, err = template.ParseFiles("static/artists_list.html")
 	}
 
 	if err != nil {
@@ -54,6 +58,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	lettres := Get_alphabet(artistes)
+	searchTerm := r.URL.Query().Get("Search")
 
 	donnees := Donnees{
 		Artist:     artistes,
@@ -62,6 +67,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		Lettres:    lettres,
 		Is_artist:  current_artist,
 		Loc_dates:  current_art_loc_dates,
+		Search:     searchTerm,
 	}
 
 	err = tmpl.Execute(w, donnees)
