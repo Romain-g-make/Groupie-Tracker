@@ -9,34 +9,47 @@
 </head>
 <body>
   <div class="wrap">
-  <a class="btn" href="/static/artists_list.html">← Retour</a>
+  <a class="btn" href="/static/artists_list.html/?Reset=true">← Retour</a>
     <div style="height:12px"></div>
 
     <div id="main" class="layout">
       <div>
-        <div id="photo" class="photo">Chargement image...</div>
+        <div id="photo" class="photo">
+          {{if .Is_artist.Image}}<img src="{{.Is_artist.Image}}" alt="{{.Is_artist.Nom}}" >{{else}}Pas d'image{{end}}
+        </div>
         <div style="height:8px"></div>
         <div class="box">
-          <div><strong>Année de création</strong><div id="creation">—</div></div>
-          <div style="margin-top:8px"><strong>Premier album</strong><div id="firstAlbum">—</div></div>
+          <div><strong>Année de création</strong><div id="Annee_deb">{{if .Is_artist.Annee_deb}}{{.Is_artist.Annee_deb}}{{else}}—{{end}}</div></div>
+          <div style="margin-top:8px"><strong>Premier album</strong><div id="Date_prem_alb">{{if .Is_artist.Date_prem_alb}}{{.Is_artist.Date_prem_alb}}{{else}}—{{end}}</div></div>
         </div>
       </div>
 
       <div>
-        <h1 id="name">Chargement…</h1>
-        <div>ID: <span id="id">—</span></div>
+        <h1 id="Nom">{{.Is_artist.Nom}}</h1>
+        <div>ID: <span id="Id">{{.Is_artist.Id}}</span></div>
 
         <div style="margin-top:12px"><strong>Membres</strong>
-          <div id="members" class="members"></div>
+          <div id="Membres" class="members">
+            {{if .Is_artist.Membres}}
+              {{range .Is_artist.Membres}}
+                <div>• {{.}}</div>
+              {{end}}
+            {{else}}
+              —
+            {{end}}
+          </div>
         </div>
 
-        <div style="margin-top:12px"><strong>Locations</strong>
-          <div id="Loc" class="box">—</div>
-        </div>
-
-        <div style="margin-top:12px"><strong>Dates de concerts</strong>
-          <div id="Dates" class="box">—</div>
-        </div>
+        <div style="margin-top:12px"><strong>Lieu et date des prochains concerts</strong>
+          <div id="Prochains_concerts" class="locations">
+            {{if .Loc_dates}}
+              {{range $loc, $date := .Loc_dates}}
+                <div>• {{$loc}} - {{$date}}</div>
+              {{end}}
+            {{else}}
+              —
+            {{end}}
+          </div>
       </div>
     </div>
   </div>
