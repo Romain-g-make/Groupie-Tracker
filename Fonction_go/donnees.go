@@ -6,6 +6,5 @@ type Donnees struct {
 	Pagination int
 	Lettres    []string
 	Is_artist  Artist
-	Loc		[]string
-	Dates		[]string
+	Loc_dates  map[string]string
 }
