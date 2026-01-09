@@ -7,4 +7,5 @@ type Donnees struct {
 	Lettres    []string
 	Is_artist  Artist
 	Loc_dates  map[string]string
+	Search     string
 }
