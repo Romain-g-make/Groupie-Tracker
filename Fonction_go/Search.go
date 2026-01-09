@@ -69,6 +69,5 @@ func Searching(artistes []Artist, find_art string) []Artist {
 			delete(dic_art, max_key)
 		}
 	}
-	fmt.Println(result)
 	return result
 }
