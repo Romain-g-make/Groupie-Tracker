@@ -4,78 +4,42 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"strconv"
 )
 
-var artistes []Artist
-
 func RenderTemplate(w http.ResponseWriter, r *http.Request) {
-	current_art_loc_dates := map[string]string{}
-	Reset := r.URL.Query().Get("Reset")
-	is_art := r.URL.Query().Get("Is_artist")
-
-	if Reset != "list" {
-		if err := Request_art(&artistes); err != nil {
-			http.Error(w, "Erreur lors de la récupération des artistes", http.StatusBadGateway)
-			log.Println("Erreur Request_art :", err)
-			return
-		}
+	funcMap := template.FuncMap{
+		"add": func(a, b int) int { return a + b },
+		"sub": func(a, b int) int { return a - b },
 	}
 
-	p := r.URL.Query().Get("pagination")
-	pagination_act, _ := strconv.Atoi(p)
+	params := extractQueryParams(r)
 
-	pa := r.URL.Query().Get("page")
-	page_act, _ := strconv.Atoi(pa)
-
-	tmpl, err := template.ParseFiles("static/page_connexion.html")
-	var current_artist Artist
-
-	if r.URL.Query().Get("Search") != "" || Reset == "list" {
-		artistes = Searching(artistes, r.URL.Query().Get("Search"), r.URL.Query().Get("SearchType"))
-		pagination_act = 0
-		page_act = 0
-		tmpl, err = template.ParseFiles("static/artists_list.html")
-	}
-
-	if is_art != "" {
-		current_artist = Find_artist(artistes, is_art)
-		current_art_loc_dates = Loc_date(current_artist.Id)
-		tmpl, err = template.ParseFiles("static/artist_detail.html")
-	} else {
-		current_artist = Artist{}
-	}
-
+	baseArtists, err := Request_art()
 	if err != nil {
-		http.Error(w, "Erreur template : "+err.Error(), http.StatusInternalServerError)
-		log.Println("Erreur template :", err)
+		handleError(w, "Erreur lors de la récupération des artistes", http.StatusBadGateway, err)
 		return
-
-	}
-	if pagination_act != 0 {
-		artiste_dec := Pagination(pagination_act, artistes)
-		artistes = artiste_dec[page_act]
-	}
-	lettres := Get_alphabet(artistes)
-	searchTerm := r.URL.Query().Get("Search")
-	searchType := r.URL.Query().Get("SearchType")
-
-	donnees := Donnees{
-		Artist:     artistes,
-		Page:       page_act,
-		Pagination: pagination_act,
-		Lettres:    lettres,
-		Is_artist:  current_artist,
-		Loc_dates:  current_art_loc_dates,
-		Search:     searchTerm,
-		SearchType: searchType,
 	}
 
-	err = tmpl.Execute(w, donnees)
+	artistesToDisplay := make([]Artist, len(baseArtists))
+	copy(artistesToDisplay, baseArtists)
 
+	tmplPath, data := prepareTemplateData(artistesToDisplay, params, funcMap)
+
+	tmpl, err := template.New(tmplPath).Funcs(funcMap).ParseFiles("static/" + tmplPath)
 	if err != nil {
-		http.Error(w, "Erreur template : "+err.Error(), http.StatusInternalServerError)
-		log.Println("Erreur template :", err)
+		handleError(w, "Erreur lors du chargement du template", http.StatusInternalServerError, err)
 		return
+	}
+
+	if err := tmpl.Execute(w, data); err != nil {
+		handleError(w, "Erreur lors de l'exécution du template", http.StatusInternalServerError, err)
+		return
+	}
+}
+
+func handleError(w http.ResponseWriter, message string, statusCode int, err error) {
+	http.Error(w, message, statusCode)
+	if err != nil {
+		log.Printf("%s: %v", message, err)
 	}
 }
