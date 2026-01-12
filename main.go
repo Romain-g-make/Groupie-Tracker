@@ -23,6 +23,8 @@ func main() {
 		io.Copy(w, resp.Body)
 	})
 
+	// http.HandleFunc("/concerts", fonction_go.ConcertsHandler)
+
 	handler := http.StripPrefix("/static/", http.FileServer(http.Dir("static")))
 	http.Handle("/static/", handler)
 	http.HandleFunc("/", fonction_go.RenderTemplate)
