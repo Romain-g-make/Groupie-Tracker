@@ -6,25 +6,25 @@ import (
 	"net/http"
 )
 
-func Request_art(artistes *[]Artist) error {
+func Request_art() ([]Artist, error) {
 	resp, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
-		return fmt.Errorf("appel API artists: %w", err)
+		return nil, fmt.Errorf("appel API artists: %w", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("API artists retourne le statut %d", resp.StatusCode)
+		return nil, fmt.Errorf("API artists retourne le statut %d", resp.StatusCode)
 	}
 
 	var payload []Artist
 	if err := json.NewDecoder(resp.Body).Decode(&payload); err != nil {
-		return fmt.Errorf("décodage JSON artists: %w", err)
+		return nil, fmt.Errorf("décodage JSON artists: %w", err)
 	}
 
-	converted := make([]Artist, 0, len(payload))
+	artistes := make([]Artist, 0, len(payload))
 	for _, a := range payload {
-		converted = append(converted, Artist{
+		artistes = append(artistes, Artist{
 			Id:            a.Id,
 			Nom:           a.Nom,
 			Image:         a.Image,
@@ -34,8 +34,7 @@ func Request_art(artistes *[]Artist) error {
 		})
 	}
 
-	*artistes = converted
-	return nil
+	return artistes, nil
 }
 
 func Get_artistes(artistes []Artist) []string {
