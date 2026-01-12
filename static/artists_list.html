@@ -9,16 +9,45 @@
 </head>
 <body>
     <div class="search-bar">
-        <form method="GET" action="/" class="search-form">
-            <input class="connexion" type="text" name="Search" placeholder="Rechercher...">
-            <select name="SearchType" class="search-select" type ="submit">
-                <option value="artist">Nom</option>
-                <option value="date">Date</option>
-                <option value="location">Location</option>
-            </select>
-            <button class="btn-primary" type="submit">🔍 Rechercher</button>
-        </form>
-    </div>  
+      <form method="GET" action="/" class="search-form">
+
+        <input 
+          class="connexion" 
+          type="text" 
+          name="Search" 
+          placeholder="Rechercher..."
+          value="{{.Search}}">
+
+        <select name="SearchType" class="search-select">
+          <option value="artist" {{if eq .SearchType "artist" }} selected{{end}}>Nom</option>
+          <option value="date" {{if eq .SearchType "date" }} selected{{end}}>Date</option>
+          <option value="location" {{if eq .SearchType "location" }} selected{{end}}>Location</option>
+        </select>
+
+        <input
+          type="number"
+          name="pagination"
+          class="pagination-input"
+          min="1"
+          max="100"
+          placeholder="Artistes / page"
+          value="{{if gt .Pagination 0}}{{.Pagination}}{{end}}"
+        >
+        <input
+          type="hidden"
+          name="page"
+          class="pagination-input"
+          placeholder="Artistes par page"
+          value="{{if gt .Page 0}}{{.Page}}{{else}}{{0}}{{end}}"
+        >
+
+        <button class="btn-primary" type="submit">
+          🔍 Rechercher
+        </button>
+
+      </form>
+</div>
+  
 
   <div class="container">
     <div class="top-actions">
@@ -29,7 +58,7 @@
   <form action="/" method="get">
     <div class="artists">
     {{range .Artist}}
-      <a href="/?Is_artist={{.Nom}}{{if $.Search}}&Search={{$.Search}}{{end}}" class="artist">
+      <a href="/?Is_artist={{.Nom}}{{if $.Search}}&Search={{$.Search}}&SearchType={{$.SearchType}}{{end}}" class="artist">
         <div class="image">
           <img src="{{.Image}}" alt="Photo de {{.Nom}}">
         </div>
@@ -40,5 +69,24 @@
       {{end}}
     </div>
   </form>
+  <div class="pagination">
+    {{if gt .Page 0}}
+      <a class="btn btn-primary"
+        href="/?pagination={{.Pagination}}&page={{sub .Page 1}}{{if .Search}}&Search={{.Search}}&SearchType={{.SearchType}}{{end}}">
+        ← Précédent
+      </a>
+    {{end}}
+
+    <span class="page-indicator">
+      Page {{add .Page 1}}
+    </span>
+
+    {{if lt (add .Page 1) .Pagination}}
+      <a class="btn btn-primary"
+        href="/?pagination={{.Pagination}}&page={{add .Page 1}}{{if .Search}}&Search={{.Search}}&SearchType={{.SearchType}}{{end}}">
+        Suivant →
+      </a>
+    {{end}}
+  </div>
 </body>
 </html>
