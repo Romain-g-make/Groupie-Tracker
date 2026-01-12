@@ -10,12 +10,18 @@
     <div class="search-bar">
         <form method="GET" action="/" class="search-form">
             <input class="connexion" type="text" name="Search" placeholder="Rechercher...">
+            <select name="SearchType" class="search-select" type ="submit">
+                <option value="artist">Nom</option>
+                <option value="date">Date</option>
+                <option value="location">Location</option>
+            </select>
             <button class="btn-primary" type="submit">🔍 Rechercher</button>
         </form>
     </div>  
 
     <div class="alphabet">
         <form method="GET" action="/" class="alphabet">
+        <input type="hidden" name="SearchType" value="artist">
             {{ range .Lettres }}
                 <button class="btn-primary" type="submit" name="Search" value="{{ . }}">{{ . }}</button>
             {{ end }}
