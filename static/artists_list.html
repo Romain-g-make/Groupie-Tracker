@@ -22,14 +22,14 @@
 
   <div class="container">
     <div class="top-actions">
-      <a class="btn btn-primary" id="backHome" href="/?Reset=acceuil">← Accueil</a>
-      <span style="margin-left:12px;color:#000">Liste des groupes</span>
+      <a class="btn btn-primary" id="backHome" href="/">← Accueil</a>
+      <span style="margin-left:12px;color:#111">Liste des groupes</span>
     </div>
   </div>
   <form action="/" method="get">
     <div class="artists">
     {{range .Artist}}
-      <a href="/?Is_artist={{.Nom}}{{if $.Search}}&Search={{$.Search}}{{end}}" class="artist artist-btn">
+      <a href="/?Is_artist={{.Nom}}{{if $.Search}}&Search={{$.Search}}{{end}}" class="artist">
         <div class="image">
           <img src="{{.Image}}" alt="Photo de {{.Nom}}">
         </div>

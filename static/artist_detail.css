@@ -3,7 +3,7 @@ body {
   line-height: 1.4;
   background: linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));
   min-height: 100vh;
-  color: #fff;
+  color: rgb(145, 2, 211);
 }
 
 /* ============================================
@@ -98,7 +98,7 @@ body {
 }
 
 .info-item {
-    background: #f8f9fa;
+    background: rgb(145, 2, 211);
     padding: 1rem;
     border-radius: 5px;
 }
@@ -165,7 +165,7 @@ strong{color:#fff}
 .search-form .connexion{
     flex:1;
     background:#241c36;
-    color:#f6e8ff;
+    color:rgb(145, 2, 211);
     border:1px solid #4b3478;
     border-radius:999px;
     padding:10px 14px;
