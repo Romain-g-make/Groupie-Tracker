@@ -7,14 +7,11 @@
     <link rel="stylesheet" href="/static/page_connexion.css">
 </head>
 <body>
-    <div class="search-bar">
+    <div class="search-panel">
         <form method="GET" action="/" class="search-form">
             <input class="connexion" type="text" name="Search" placeholder="Rechercher...">
-            <button class="btn-primary" type="submit">🔍 Rechercher</button>
+            <button class="btn-primary" type="submit"> Rechercher</button>
         </form>
-    </div>  
-
-    <div class="alphabet">
         <form method="GET" action="/" class="alphabet">
             {{ range .Lettres }}
                 <button class="btn-primary" type="submit" name="Search" value="{{ . }}">{{ . }}</button>
@@ -39,10 +36,6 @@
             <div class="feature-card">
                 <h3>🔍 Advanced Search</h3>
                 <p>Search by name, members, creation date, and more</p>
-            </div>
-            <div class="feature-card">
-                <h3>🗺️ Concert Locations</h3>
-                <p>Discover concert locations on an interactive map</p>
             </div>
             <div class="feature-card">
                 <h3>📊 Smart Filters</h3>
