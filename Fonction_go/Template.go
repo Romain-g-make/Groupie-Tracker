@@ -32,7 +32,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 	var current_artist Artist
 
 	if r.URL.Query().Get("Search") != "" || Reset == "list" {
-		artistes = Searching(artistes, r.URL.Query().Get("Search"))
+		artistes = Searching(artistes, r.URL.Query().Get("Search"), r.URL.Query().Get("SearchType"))
 		pagination_act = 0
 		page_act = 0
 		tmpl, err = template.ParseFiles("static/artists_list.html")
@@ -56,9 +56,9 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		artiste_dec := Pagination(pagination_act, artistes)
 		artistes = artiste_dec[page_act]
 	}
-
 	lettres := Get_alphabet(artistes)
 	searchTerm := r.URL.Query().Get("Search")
+	searchType := r.URL.Query().Get("SearchType")
 
 	donnees := Donnees{
 		Artist:     artistes,
@@ -68,6 +68,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 		Is_artist:  current_artist,
 		Loc_dates:  current_art_loc_dates,
 		Search:     searchTerm,
+		SearchType: searchType,
 	}
 
 	err = tmpl.Execute(w, donnees)
