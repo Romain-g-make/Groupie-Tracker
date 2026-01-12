@@ -8,4 +8,5 @@ type Donnees struct {
 	Is_artist  Artist
 	Loc_dates  map[string]string
 	Search     string
+	SearchType string
 }
