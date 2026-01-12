@@ -1,9 +1,23 @@
 package fonction_go
 
-func Pagination(nb int, artistes []Artist) [][]Artist {
-	var tab_final [][]Artist
+func Pagination(nb int, artistes []Artist, page int) []Artist {
+    if nb <= 0 || page < 0 || len(artistes) == 0 {
+        return artistes
+    }
+    var result []Artist
 	for i := 0; i < nb; i++ {
-		tab_final = append(tab_final, artistes[i:(len(artistes)/nb)+i*(len(artistes)/nb)])
+		result = append(result,artistes[i+(page*nb)])
 	}
-	return tab_final
+	return result
+}
+
+func GetTotalPages(nb int, artistes []Artist) int {
+    if nb <= 0 {
+        return 1
+    }
+    total := len(artistes) / nb
+    if len(artistes) % nb != 0 {
+        total++
+    }
+    return total
 }
