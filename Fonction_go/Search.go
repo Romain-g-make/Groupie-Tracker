@@ -26,7 +26,6 @@ func Search(artistes []Artist, find string, searchType string) map[string]int {
 	for _, artiste := range artistes {
 
 		field := strings.ToLower(strings.Join(getSearchField(artiste, searchType), " "))
-		
 
 		correspondance := 0
 
@@ -77,18 +76,23 @@ func Searching(artistes []Artist, find string, searchType string) []Artist {
 		maxScore := 0
 		maxKey := ""
 
-		for key, score := range dic_art {
-			if score > maxScore {
+		// Parcourir dans l'ordre original pour avoir un tri déterministe
+		for _, artiste := range artistes {
+			if score, exists := dic_art[artiste.Nom]; exists && score > maxScore {
 				maxScore = score
-				maxKey = key
+				maxKey = artiste.Nom
 			}
 		}
 
-		artiste := Find_artist(artistes, maxKey)
-		if artiste.Nom != "" {
-			result = append(result, artiste)
+		if maxKey != "" {
+			artiste := Find_artist(artistes, maxKey)
+			if artiste.Nom != "" {
+				result = append(result, artiste)
+			}
+			delete(dic_art, maxKey)
+		} else {
+			break
 		}
-		delete(dic_art, maxKey)
 	}
 
 	return result
