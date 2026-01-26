@@ -13,6 +13,14 @@ func prepareTemplateData(artists []Artist, params queryParams, funcMap template.
 	if params.artistName == "" && (params.searchQuery != "" || params.reset == "list") {
 		displayedArtists = Searching(displayedArtists, params.searchQuery, params.searchType)
 	}
+	
+	// Appliquer le tri
+	if params.sortOrder == "asc" {
+		displayedArtists = Tri_alpha_croissant(displayedArtists)
+	} else if params.sortOrder == "desc" {
+		displayedArtists = Tri_alpha_decroissant(displayedArtists)
+	}
+	
 	if params.artistName != "" {
 		tmplPath = "artist_detail.html"
 		currentArtist = Find_artist(artists, params.artistName)
@@ -42,6 +50,7 @@ func prepareTemplateData(artists []Artist, params queryParams, funcMap template.
 		Loc_dates:  locDates,
 		Search:     params.searchQuery,
 		SearchType: params.searchType,
+		Sort:       params.sortOrder,
 	}
 
 	return tmplPath, data

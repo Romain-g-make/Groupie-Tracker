@@ -9,4 +9,5 @@ type Donnees struct {
 	Loc_dates  map[string]string
 	Search     string
 	SearchType string
+	Sort       string
 }

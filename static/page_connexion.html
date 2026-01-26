@@ -10,15 +10,16 @@
     <div class="search-panel">
         <form method="GET" action="/" class="search-form">
             <input class="connexion" type="text" name="Search" placeholder="Rechercher...">
-            <select name="SearchType" class="search-select" type ="submit">
+            <select name="SearchType" class="search-select">
                 <option value="artist">Nom</option>
-                <option value="date">Date</option>
+                <option value="date">Date d'un concert</option>
                 <option value="location">Location</option>
+                <option value="annee">Année de création</option>
             </select>
             <button class="btn-primary" type="submit">🔍 Rechercher</button>
         </form>
         <form method="GET" action="/" class="alphabet">
-        <input type="hidden" name="SearchType" value="artist">
+            <input type="hidden" name="SearchType" value="artist">
             {{ range .Lettres }}
                 <button class="btn-primary" type="submit" name="Search" value="{{ . }}">{{ . }}</button>
             {{ end }}
@@ -29,7 +30,7 @@
         <div class="hero-content">
             <h2>Discover Your Favorite Music Artists</h2>
             <p>Explore a comprehensive database of music groups and artists</p>
-            <a href="/?Reset=list" class="btn btn-primary">Entrer</a>
+            <a href="/?Search=all&SearchType=artist" class="btn btn-primary">Entrer</a>
         </div>
     </div>
 
@@ -49,8 +50,8 @@
             </div>
         </section>
     </div>
-        <footer class="footer">   
-            <p>Dico-Musique © 2024</p>
-        </footer>
+    <footer class="footer">   
+        <p>Dico-Musique © 2024</p>
+    </footer>
 </body>
 </html>

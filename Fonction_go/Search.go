@@ -2,6 +2,7 @@ package fonction_go
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -9,6 +10,9 @@ func getSearchField(artist Artist, searchType string) []string {
 	switch searchType {
 	case "artist":
 		return []string{artist.Nom}
+	case "annee":
+		list := strconv.Itoa(artist.Annee_deb)
+		return []string{list}
 	case "date":
 		return Get_Dates(artist.Id)
 	case "location":
@@ -22,9 +26,9 @@ func Search(artistes []Artist, find string, searchType string) map[string]int {
 
 	dic_art := make(map[string]int)
 	findLower := strings.ToLower(find)
-
+	
 	for _, artiste := range artistes {
-
+		
 		field := strings.ToLower(strings.Join(getSearchField(artiste, searchType), " "))
 
 		correspondance := 0
@@ -61,7 +65,7 @@ func Searching(artistes []Artist, find string, searchType string) []Artist {
 
 	var result []Artist
 
-	if find == "" {
+	if (find == "" || find == "all"){
 		return artistes
 	}
 

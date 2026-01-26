@@ -2,6 +2,10 @@
    RESET & BODY
    ============================================ */
 
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     min-height: 100vh;
     width: 100%;
@@ -33,13 +37,14 @@ body {
    ============================================ */
 
 .search-panel {
+    align-items: center;
     max-width: 1100px;
     margin: 20px auto 12px;
     padding: 14px 16px;
     background: rgba(255, 255, 255, 0.12);
     border-radius: 16px;
     backdrop-filter: blur(6px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 24px rgba(229, 150, 202, 0.44);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -49,12 +54,18 @@ body {
     display: flex;
     gap: 10px;
     width: 100%;
-    align-items: center;
+    max-width: 640px;
+    flex-wrap: wrap;
+}
+
+.search-form > * {
+    min-width: 0;
 }
 
 .search-form .connexion {
     flex: 1;
-    background: rgba(0, 0, 0, 0.65);
+    min-width: 180px;
+    background: rgba(209, 150, 223, 0.65);
     color: #111;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 14px;
@@ -67,12 +78,22 @@ body {
     opacity: 0.85;
 }
 
+.search-form .search-select {
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+}
+
 .alphabet {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
     gap: 8px;
     justify-content: center;
+    align-items: center;
 }
 
 /* ============================================
@@ -95,7 +116,7 @@ body {
 }
 
 .btn-primary {
-    background: transparent;
+    background:rgba(209, 150, 223, 0.65);
     color: #111;
     padding: 8px 16px;
     font-size: 0.95rem;
@@ -205,15 +226,15 @@ footer p {
 
 @media (max-width: 768px) {
     .hero {
-        padding: 60px 16px 40px;
+        padding: 50px 16px 35px;
     }
 
     .hero-content h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .hero-content p {
-        font-size: 1.05rem;
+        font-size: 1rem;
     }
 
     .search-panel {
@@ -221,41 +242,111 @@ footer p {
         padding: 12px;
     }
 
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-form .connexion,
+    .search-form .search-select,
+    .search-form .btn-primary {
+        width: 100%;
+        min-width: auto;
+    }
+
     .alphabet {
         gap: 6px;
+        justify-content: center;
     }
 
     .btn,
     .btn-primary {
-        padding: 6px 10px;
+        padding: 8px 14px;
         font-size: 0.9rem;
     }
 
     .features {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        padding: 30px 16px;
+        grid-template-columns: 1fr;
+        padding: 25px 16px;
+        gap: 16px;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.1rem;
     }
 }
 
 @media (max-width: 480px) {
     .search-panel {
         padding: 10px;
+        margin: 10px auto 6px;
+    }
+
+    .search-form {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .search-form .connexion,
+    .search-form .search-select,
+    .search-form .btn-primary {
+        width: 100%;
+        font-size: 0.95rem;
+        padding: 10px 12px;
     }
 
     .alphabet {
         justify-content: center;
+        gap: 4px;
+    }
+
+    .btn, .btn-primary {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .hero {
+        padding: 40px 12px 25px;
     }
 
     .hero-content h2 {
-        font-size: 1.7rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
     }
 
     .hero-content p {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
     }
 
     .features {
         grid-template-columns: 1fr;
-        padding: 20px 12px;
+        padding: 15px 12px;
+        gap: 12px;
+    }
+
+    .feature-card {
+        padding: 1.2rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .feature-card p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    footer {
+        padding: 1.5rem 12px;
+    }
+
+    footer p {
+        font-size: 0.85rem;
     }
 }

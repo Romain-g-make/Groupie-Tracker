@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   min-height: 100vh;
   width: 100%;
@@ -20,6 +24,69 @@ body {
     padding: 0 20px;
 }
 
+
+.search-bar {
+    align-items: center;
+    max-width: 1100px;
+    margin: 20px auto 12px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 24px rgba(229, 150, 202, 0.44);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 900px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.search-form > * {
+    min-width: 0;
+}
+
+.search-form .connexion {
+    flex: 1;
+    min-width: 180px;
+    background: rgba(209, 150, 223, 0.65);
+    color: #111;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+}
+
+.search-form .connexion::placeholder {
+    color: #222;
+    opacity: 0.85;
+}
+
+.search-form .search-select {
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+}
+
+.search-form .pagination-input {
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    width: 120px;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+}
+
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -30,15 +97,18 @@ body {
     cursor: pointer;
     border: 1px solid rgba(0, 0, 0, 0.25);
     font-size: 1rem;
+    white-space: nowrap;
 }
 
 .btn-primary {
-    background: transparent;
+    background:rgba(209, 150, 223, 0.65);
     color: #111;
-    padding: 12px 30px;
-    font-size: 1.1rem;
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    border-radius: 20px;
     border: 1px solid rgba(0, 0, 0, 0.25);
 }
+
 
 .btn-primary:hover {
     transform: translateY(-2px);
@@ -48,11 +118,15 @@ body {
 
 .top-actions {
     margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
 }
 
 .artists {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
     padding: 20px;
     max-width: 1200px;
@@ -91,20 +165,122 @@ body {
 .artist .name {
     padding: 10px 12px 14px;
     font-weight: 600;
+    font-size: 0.95rem;
+    word-break: break-word;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 0 10px;
+}
+
+.page-indicator {
+    color: #fff;
+    font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+    .search-bar {
+        margin: 16px auto 10px;
+    }
+
+    .artists {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .search-form .pagination-input {
+        width: 100px;
+    }
 }
 
 @media (max-width: 768px) {
+    .search-bar {
+        margin: 12px auto 8px;
+        padding: 12px;
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-form .connexion,
+    .search-form .search-select,
+    .search-form .pagination-input,
+    .search-form .btn-primary {
+        width: 100%;
+    }
+
     .artists {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-        padding: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .btn-primary {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .top-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pagination {
+        margin: 15px 0;
     }
 }
 
 @media (max-width: 480px) {
+    .search-bar {
+        margin: 10px auto 6px;
+        padding: 10px;
+    }
+
+    .search-form {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .search-form .connexion,
+    .search-form .search-select,
+    .search-form .pagination-input,
+    .search-form .btn-primary {
+        width: 100%;
+        font-size: 0.95rem;
+    }
+
     .artists {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 12px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .artist .name {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+
+    .btn, .btn-primary {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .pagination {
+        flex-direction: column;
+        gap: 8px;
+        margin: 12px 0;
+    }
+
+    .page-indicator {
+        font-size: 0.9rem;
     }
 }

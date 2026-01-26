@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Liste des groupes</title>
 
   <link rel="stylesheet" href="/static/artists_list.css">
@@ -20,8 +20,15 @@
 
         <select name="SearchType" class="search-select">
           <option value="artist" {{if eq .SearchType "artist" }} selected{{end}}>Nom</option>
-          <option value="date" {{if eq .SearchType "date" }} selected{{end}}>Date</option>
+          <option value="date" {{if eq .SearchType "date" }} selected{{end}}>Date d'un concert</option>
           <option value="location" {{if eq .SearchType "location" }} selected{{end}}>Location</option>
+          <option value="annee" {{if eq .SearchType "annee" }} selected{{end}}>Année de création</option>
+        </select>
+
+        <select name="sort" class="search-select">
+          <option value="">Sans tri</option>
+          <option value="asc" {{if eq .Sort "asc" }} selected{{end}}>A → Z</option>
+          <option value="desc" {{if eq .Sort "desc" }} selected{{end}}>Z → A</option>
         </select>
 
         <input
@@ -46,33 +53,34 @@
         </button>
 
       </form>
-</div>
+    </div>
   
 
   <div class="container">
     <div class="top-actions">
       <a class="btn btn-primary" id="backHome" href="/">← Accueil</a>
-      <span style="margin-left:12px;color:#111">Liste des groupes</span>
+      <span style="color:#fff">Liste des groupes</span>
     </div>
   </div>
-  <form action="/" method="get">
-    <div class="artists">
+  
+  <div class="artists">
     {{range .Artist}}
-      <a href="/?Is_artist={{.Nom}}{{if $.Search}}&Search={{$.Search}}&SearchType={{$.SearchType}}{{end}}" class="artist">
+      <a href="/?Is_artist={{.Nom}}&Search={{$.Search}}{{if $.SearchType}}&SearchType={{$.SearchType}}{{end}}" class="artist">
         <div class="image">
           <img src="{{.Image}}" alt="Photo de {{.Nom}}">
         </div>
         <div class="name">{{.Nom}}</div>
-        </a>
-      {{else}}
-        <span>Aucun artiste trouvé.</span>
-      {{end}}
-    </div>
-  </form>
+        <div class="name">Création : {{.Annee_deb}}</div>
+      </a>
+    {{else}}
+      <span style="color:#fff; grid-column: 1 / -1; text-align: center; padding: 20px;">Aucun artiste trouvé.</span>
+    {{end}}
+  </div>
+  
   <div class="pagination">
     {{if gt .Page 0}}
       <a class="btn btn-primary"
-        href="/?pagination={{.Pagination}}&page={{sub .Page 1}}{{if .Search}}&Search={{.Search}}&SearchType={{.SearchType}}{{end}}">
+        href="/?pagination={{.Pagination}}&page={{sub .Page 1}}&Search={{.Search}}{{if .SearchType}}&SearchType={{.SearchType}}{{end}}{{if .Sort}}&sort={{.Sort}}{{end}}">
         ← Précédent
       </a>
     {{end}}
@@ -83,7 +91,7 @@
 
     {{if lt (add .Page 1) .Pagination}}
       <a class="btn btn-primary"
-        href="/?pagination={{.Pagination}}&page={{add .Page 1}}{{if .Search}}&Search={{.Search}}&SearchType={{.SearchType}}{{end}}">
+        href="/?pagination={{.Pagination}}&page={{add .Page 1}}&Search={{.Search}}{{if .SearchType}}&SearchType={{.SearchType}}{{end}}{{if .Sort}}&sort={{.Sort}}{{end}}">
         Suivant →
       </a>
     {{end}}

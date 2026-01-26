@@ -1,11 +1,17 @@
 package fonction_go
 
 func Pagination(nb int, artistes []Artist, page int) []Artist {
+	if nb>len(artistes) {
+		return artistes
+	}
 	if nb <= 0 || page < 0 || len(artistes) == 0 {
 		return artistes
 	}
 	var result []Artist
 	for i := 0; i < nb; i++ {
+		if i+(page*nb) >= len(artistes) {
+			break
+		}
 		result = append(result, artistes[i+(page*nb)])
 	}
 	return result
