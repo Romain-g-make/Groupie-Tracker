@@ -122,6 +122,20 @@ body {
     flex-wrap: wrap;
     gap: 12px;
     align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.top-actions #backHome {
+    position: absolute;
+    left: 0;
+}
+
+.page-title {
+    flex: 1;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
 }
 
 .artists {
@@ -183,6 +197,14 @@ body {
 .page-indicator {
     color: #fff;
     font-weight: 600;
+}
+
+.footer {
+    text-align: center;
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 16px 0 24px;
+    opacity: 0.85;
 }
 
 @media (max-width: 1024px) {
