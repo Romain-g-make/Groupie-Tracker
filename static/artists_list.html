@@ -2,57 +2,102 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Liste des groupes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des artistes</title>
 
-  <link rel="stylesheet" href="/static/connexion.css">
-  <style>
-
-    .simple-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-
-    .simple-card{background:#000000;border-radius:8px;padding:8px;text-align:center;cursor:pointer;color:#fff}
-    .thumb{height:110px;background:#111;border-radius:6px;overflow:hidden}
-    .thumb img{width:100%;height:100%;object-fit:cover}
-    .name{margin-top:8px;font-weight:600;color:#fff}
-    .top-actions{margin-bottom:12px}
-  </style>
+  <link rel="stylesheet" href="/static/artists_list.css">
 </head>
 <body>
+    <div class="search-bar">
+      <form method="GET" action="/" class="search-form">
+
+        <input 
+          class="connexion" 
+          type="text" 
+          name="Search" 
+          placeholder="Rechercher..."
+          value="{{.Search}}">
+
+        <select name="SearchType" class="search-select">
+          <option value="artist" {{if eq .SearchType "artist" }} selected{{end}}>Nom</option>
+          <option value="date" {{if eq .SearchType "date" }} selected{{end}}>Date d'un concert</option>
+          <option value="location" {{if eq .SearchType "location" }} selected{{end}}>Location</option>
+          <option value="annee" {{if eq .SearchType "annee" }} selected{{end}}>Année de création</option>
+        </select>
+
+        <select name="sort" class="search-select">
+          <option value="">Sans tri</option>
+          <option value="asc" {{if eq .Sort "asc" }} selected{{end}}>A → Z</option>
+          <option value="desc" {{if eq .Sort "desc" }} selected{{end}}>Z → A</option>
+        </select>
+
+        <input
+          type="number"
+          name="pagination"
+          class="pagination-input"
+          min="1"
+          max="100"
+          placeholder="Artistes / page"
+          value="{{if gt .Pagination 0}}{{.Pagination}}{{end}}"
+        >
+        <input
+          type="hidden"
+          name="page"
+          class="pagination-input"
+          placeholder="Artistes par page"
+          value="{{if gt .Page 0}}{{.Page}}{{else}}{{0}}{{end}}"
+        >
+
+        <button class="btn-primary" type="submit">
+          🔍 Rechercher
+        </button>
+
+      </form>
+    </div>
+  
+
   <div class="container">
     <div class="top-actions">
-      <a class="btn btn-primary" id="backHome" href="/static/page_connexion.html">← Accueil</a>
-      <span style="margin-left:12px;color:#000">Liste des groupes</span>
+      <a class="btn btn-primary" id="backHome" href="/">← Accueil</a>
+      <span class="page-title">Liste des artistes</span>
     </div>
-
-    <div id="main">Chargement...</div>
   </div>
+  
+  <div class="artists">
+    {{range .Artist}}
+      <a href="/?Is_artist={{.Nom}}&Search={{$.Search}}{{if $.SearchType}}&SearchType={{$.SearchType}}{{end}}" class="artist">
+        <div class="image">
+          <img src="{{.Image}}" alt="Photo de {{.Nom}}">
+        </div>
+        <div class="name">{{.Nom}}</div>
+        <div class="name">Création : {{.Annee_deb}}</div>
+      </a>
+    {{else}}
+      <span style="color:#fff; grid-column: 1 / -1; text-align: center; padding: 20px;">Aucun artiste trouvé.</span>
+    {{end}}
+  </div>
+  
+  <div class="pagination">
+    {{if gt .Page 0}}
+      <a class="btn btn-primary"
+        href="/?pagination={{.Pagination}}&page={{sub .Page 1}}&Search={{.Search}}{{if .SearchType}}&SearchType={{.SearchType}}{{end}}{{if .Sort}}&sort={{.Sort}}{{end}}">
+        ← Précédent
+      </a>
+    {{end}}
 
-  <script>
+    <span class="page-indicator">
+      Page {{add .Page 1}}
+    </span>
 
-    async function load(){
-      try{
-
-        const r = await fetch('/api/artists');
-        if(!r.ok) throw new Error('HTTP '+r.status);
-        const list = await r.json();
-
-        let html = '<div class="simple-grid">';
-        for(const a of list){
-          const img = a.image ? `<img src="${a.image}" alt="">` : '<div style="padding:24px;color:#666">Pas d\'image</div>';
-          html += `<div class="simple-card" onclick="window.location='/static/artist_detail.html?id=${a.id}'">
-                    <div class="thumb">${img}</div>
-                    <div class="name">${a.name || '—'}</div>
-                  </div>`;
-        }
-        html += '</div>';
-        document.getElementById('main').innerHTML = html;
-
-      }catch(err){
-        document.getElementById('main').textContent = 'Erreur: '+err.message;
-        console.error(err);
-      }
-    }
-    load();
-  </script>
+    {{if lt (add .Page 1) .Pagination}}
+      <a class="btn btn-primary"
+        href="/?pagination={{.Pagination}}&page={{add .Page 1}}&Search={{.Search}}{{if .SearchType}}&SearchType={{.SearchType}}{{end}}{{if .Sort}}&sort={{.Sort}}{{end}}">
+        Suivant →
+      </a>
+    {{end}}
+  </div>
+  <footer class="footer">   
+        <p>Romain_Rousseau_Benjamin_Lemoine_Romain_Guibert©2024</p>
+  </footer>
 </body>
 </html>

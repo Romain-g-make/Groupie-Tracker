@@ -4,22 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dico-Musique-Connexion</title>
-    <link rel="stylesheet" href="/static/connexion.css">
+    <link rel="stylesheet" href="/static/page_connexion.css">
 </head>
 <body>
-    <input class="connexion" type="text" placeholder="Rechercher...">
-    <div class="alphabet">
-        {{ range .Lettres }}
-            <a class="letter" href="/lettre/{{ . }}">{{ . }}</a>
-        {{ end }}
+    <div class="search-panel">
+        <form method="GET" action="/" class="search-form">
+            <input class="connexion" type="text" name="Search" placeholder="Rechercher...">
+            <select name="SearchType" class="search-select">
+                <option value="artist">Nom</option>
+                <option value="date">Date d'un concert</option>
+                <option value="location">Location</option>
+                <option value="annee">Année de création</option>
+            </select>
+            <button class="btn-primary" type="submit">🔍 Rechercher</button>
+        </form>
+        <form method="GET" action="/" class="alphabet">
+            <input type="hidden" name="SearchType" value="artist">
+            {{ range .Lettres }}
+                <button class="btn-primary" type="submit" name="Search" value="{{ . }}">{{ . }}</button>
+            {{ end }}
+        </form>
     </div>
-
 
     <div class="hero">
         <div class="hero-content">
             <h2>Discover Your Favorite Music Artists</h2>
             <p>Explore a comprehensive database of music groups and artists</p>
-            <a href="/static/artists_list.html" class="btn btn-primary">Entrer</a>
+            <a href="/?Search=all&SearchType=artist" class="btn btn-primary">Entrer</a>
         </div>
     </div>
 
@@ -34,17 +45,13 @@
                 <p>Search by name, members, creation date, and more</p>
             </div>
             <div class="feature-card">
-                <h3>🗺️ Concert Locations</h3>
-                <p>Discover concert locations on an interactive map</p>
-            </div>
-            <div class="feature-card">
                 <h3>📊 Smart Filters</h3>
                 <p>Filter artists by multiple criteria with ease</p>
             </div>
         </section>
     </div>
-        <footer class="footer">   
-            <p>Dico-Musique © 2024</p>
-        </footer>
+    <footer class="footer">   
+        <p>Romain_Rousseau_Benjamin_Lemoine_Romain_Guibert©2024</p>
+    </footer>
 </body>
 </html>

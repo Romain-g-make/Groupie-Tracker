@@ -7,6 +7,6 @@ type Artist struct {
 	Annee_deb     int      `json:"creationDate"`
 	Date_prem_alb string   `json:"firstAlbum"`
 	Membres       []string `json:"members"`
-	Locations     string `json:"locations"`
-	Date_concerts string `json:"concertDates"`
+	Locations     string   `json:"locations"`
+	Date_concerts string   `json:"concertDates"`
 }

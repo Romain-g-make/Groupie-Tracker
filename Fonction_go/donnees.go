@@ -4,5 +4,10 @@ type Donnees struct {
 	Artist     []Artist
 	Page       int
 	Pagination int
-	Lettre	 []string
+	Lettres    []string
+	Is_artist  Artist
+	Loc_dates  map[string]string
+	Search     string
+	SearchType string
+	Sort       string
 }

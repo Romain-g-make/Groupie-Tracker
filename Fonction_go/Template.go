@@ -1,54 +1,45 @@
 package fonction_go
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
-	"strconv"
 )
 
-
-var artistes []Artist
-
 func RenderTemplate(w http.ResponseWriter, r *http.Request) {
-	Request_art(&artistes)
-	p := r.URL.Query().Get("pagination")
-	pagination_act, _ := strconv.Atoi(p)
+	funcMap := template.FuncMap{
+		"add": func(a, b int) int { return a + b },
+		"sub": func(a, b int) int { return a - b },
+	}
 
-	pa := r.URL.Query().Get("page")
-	page_act, _ := strconv.Atoi(pa)
-	
-	tmpl, err := template.ParseFiles("static/page_connexion.html")
-	
-	var artiste_dec [][]Artist
+	params := extractQueryParams(r)
 
+	baseArtists, err := Request_art()
 	if err != nil {
-		http.Error(w, "Erreur template : "+err.Error(), http.StatusInternalServerError)
-		log.Println("Erreur template :", err)
+		handleError(w, "Erreur lors de la récupération des artistes", http.StatusBadGateway, err)
 		return
 	}
-	if pagination_act != 0 {
-		artiste_dec = Pagination(pagination_act,artistes)
-	} else{
-		artiste_dec = Pagination(1,artistes)
-	}
 
-	lettres := Get_alphabet(artistes)
+	artistesToDisplay := make([]Artist, len(baseArtists))
+	copy(artistesToDisplay, baseArtists)
 
-	donnees := Donnees{
-		Artist:     artiste_dec[page_act],
-		Page:       page_act,
-		Pagination: pagination_act,
-		Lettre:     lettres,
-	}
-	fmt.Println(donnees)
+	tmplPath, data := prepareTemplateData(artistesToDisplay, params, funcMap)
 
-	err = tmpl.Execute(w, donnees)
-
+	tmpl, err := template.New(tmplPath).Funcs(funcMap).ParseFiles("static/" + tmplPath)
 	if err != nil {
-		http.Error(w, "Erreur template : "+err.Error(), http.StatusInternalServerError)
-		log.Println("Erreur template :", err)
+		handleError(w, "Erreur lors du chargement du template", http.StatusInternalServerError, err)
 		return
+	}
+
+	if err := tmpl.Execute(w, data); err != nil {
+		handleError(w, "Erreur lors de l'exécution du template", http.StatusInternalServerError, err)
+		return
+	}
+}
+
+func handleError(w http.ResponseWriter, message string, statusCode int, err error) {
+	http.Error(w, message, statusCode)
+	if err != nil {
+		log.Printf("%s: %v", message, err)
 	}
 }

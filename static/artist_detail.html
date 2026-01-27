@@ -2,90 +2,75 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Détail artiste</title>
 
-  <link rel="stylesheet" href="connexion.css">
-  <link rel="stylesheet" href="/static/connexion.css">
-  <style>
-
-    .wrap{max-width:1000px;margin:18px auto}
-    .layout{display:grid;grid-template-columns:260px 1fr;gap:18px}
-    @media (max-width:760px){.layout{grid-template-columns:1fr}}
-    .photo{width:100%;height:260px;background:#000;border-radius:8px;overflow:hidden}
-    .photo img{width:100%;height:100%;object-fit:cover}
-    .box{background:#000;padding:10px;border-radius:8px}
-    .members{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-    .member{background: #000;;padding:6px 10px;border-radius:999px}
-    .btn{display:inline-block;padding:8px 12px;background:linear-gradient(135deg, rgb(145, 2, 211), rgb(0, 0, 0));border-radius:6px;text-decoration:none}
-  </style>
+  <link rel="stylesheet" href="/static/artist_detail.css">
 </head>
 <body>
+  
+  <div class="search-bar">
+    <form method="GET" action="/" class="search-form">
+      <input class="connexion" type="text" name="Search" placeholder="Rechercher...">
+      <select name="SearchType" class="search-select">
+        <option value="artist">Nom</option>
+        <option value="date">Date</option>
+        <option value="location">Location</option>
+        <option value="annee">Année de création</option>
+      </select>
+      <button class="btn-primary" type="submit">🔍 Rechercher</button>
+    </form>
+  </div>  
+
   <div class="wrap">
-  <a class="btn" href="/static/artists_list.html">← Retour</a>
+    <a class="btn btn-alpha" href="/?{{if .Search}}Search={{.Search}}&SearchType={{.SearchType}}{{end}}{{if .Sort}}&sort={{.Sort}}{{end}}">← Retour</a>
+    </div>
     <div style="height:12px"></div>
 
     <div id="main" class="layout">
       <div>
-        <div id="photo" class="photo">Chargement image...</div>
+        <div id="photo" class="photo">
+          {{if .Is_artist.Image}}<img src="{{.Is_artist.Image}}" alt="{{.Is_artist.Nom}}" >{{else}}Pas d'image{{end}}
+        </div>
         <div style="height:8px"></div>
         <div class="box">
-          <div><strong>Année de création</strong><div id="creation">—</div></div>
-          <div style="margin-top:8px"><strong>Premier album</strong><div id="firstAlbum">—</div></div>
+          <div><strong>Année de création</strong><div id="Annee_deb">{{if .Is_artist.Annee_deb}}{{.Is_artist.Annee_deb}}{{else}}—{{end}}</div></div>
+          <div style="margin-top:8px"><strong>Premier album</strong><div id="Date_prem_alb">{{if .Is_artist.Date_prem_alb}}{{.Is_artist.Date_prem_alb}}{{else}}—{{end}}</div></div>
         </div>
       </div>
 
       <div>
-        <h1 id="name">Chargement…</h1>
-        <div>ID: <span id="id">—</span></div>
+        <h1 id="Nom">{{.Is_artist.Nom}}</h1>
+        <div>ID: <span id="Id">{{.Is_artist.Id}}</span></div>
 
         <div style="margin-top:12px"><strong>Membres</strong>
-          <div id="members" class="members"></div>
+          <div id="Membres" class="members">
+            {{if .Is_artist.Membres}}
+              {{range .Is_artist.Membres}}
+                <div>• {{.}}</div>
+              {{end}}
+            {{else}}
+              —
+            {{end}}
+          </div>
         </div>
 
-        <div style="margin-top:12px"><strong>Locations</strong>
-          <div id="locations" class="box">—</div>
-        </div>
-
-        <div style="margin-top:12px"><strong>Dates de concerts</strong>
-          <div id="concertDates" class="box">—</div>
+        <div style="margin-top:12px"><strong>Lieu et date des prochains concerts</strong>
+          <div id="Prochains_concerts" class="locations">
+            {{if .Loc_dates}}
+              {{range $loc, $date := .Loc_dates}}
+                <div>• {{$loc}} - {{$date}}</div>
+              {{end}}
+            {{else}}
+              —
+            {{end}}
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <script>
-    function getId(){ const p=new URLSearchParams(location.search); return p.get('id')?Number(p.get('id')):null }
-
-    async function load(){
-      try{
-        const r = await fetch('/api/artists');
-        if(!r.ok) throw new Error('HTTP '+r.status);
-        const list = await r.json();
-
-        const id = getId();
-        let artist = null;
-        if(id !== null) artist = (list||[]).find(a=>Number(a.id)===id);
-        if(!artist) artist = (list && list.length)? list[0] : null;
-        if(!artist){ document.getElementById('main').textContent='Aucun artiste'; return }
-
-        document.getElementById('name').textContent = artist.name || '—';
-        document.getElementById('id').textContent = artist.id ?? '—';
-
-        const photo = document.getElementById('photo'); photo.innerHTML = '';
-        if(artist.image) photo.innerHTML = `<img src="${artist.image}" alt="">`; else photo.textContent = 'Pas d\'image';
-
-        document.getElementById('creation').textContent = artist.creationDate ?? '—';
-        document.getElementById('firstAlbum').textContent = artist.firstAlbum || '—';
-
-        const m = document.getElementById('members'); m.innerHTML=''; (artist.members||[]).forEach(x=>{const s=document.createElement('span');s.className='member';s.textContent=x; m.appendChild(s)});
-
-        document.getElementById('locations').textContent = artist.locations || '—';
-        document.getElementById('concertDates').textContent = artist.concertDates || '—';
-
-      }catch(err){ document.getElementById('main').textContent = 'Erreur: '+err.message; console.error(err) }
-    }
-    load();
-  </script>
+  <footer class="footer">   
+        <p>Romain_Rousseau_Benjamin_Lemoine_Romain_Guibert©2024</p>
+  </footer>
 </body>
 </html>
